@@ -1,0 +1,375 @@
+# This file serves as a draft to play with some requests, it is not guaranteed that is cleaned at each moment in repos history
+@baseUrl = http://localhost:3000
+
+###
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "admin"
+}
+
+
+###  Create a new user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NjY5Mjk2NiwiZXhwIjoxNzQ2Njk2NTY2fQ.xyjKm-yqrKWF0yz6yiWBr32DH6h71Fz-LPdjDurq3bs
+
+{
+  "name": "jimah",
+  "email": "jimah@example.com",
+  "password": "secret123",
+  "role": "Client"
+}
+
+###
+
+###
+### 2. List all users
+GET {{baseUrl}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NzI0OTQyMywiZXhwIjoxNzQ3MjUzMDIzfQ.ZrmvQmr4G5Eb2pPYrn2dA_ZQnR3VO6fFDxyNVlWkGcs
+
+###
+
+
+### 3. Get a user by ID
+# Replace <ID> with the actual _id from step 1’s response
+GET {{baseUrl}}/api/users/<ID>
+
+###
+### 4. Update a user
+PUT {{baseUrl}}/api/users/681a11f5ae96e9fb509781dd
+Content-Type: application/json
+
+{
+  "name": "Alice Smith"
+}
+
+###
+### 5. Delete a user
+DELETE {{baseUrl}}/api/users/<ID>
+
+###
+DELETE {{baseUrl}}/api/users
+
+
+
+
+###
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "jimah@example.com",
+  "password": "secret123"
+}
+
+###
+POST {{baseUrl}}/api/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTMwNDksImV4cCI6MTc0NjY5NjY0OX0.HwaAuinhEIjK1hhpP3AHcdaZ6v5kIRpSegR-xghry-E
+
+{
+  "title": "Issue with something.",
+  "description": "Something wrong happened",
+  "priority": "High"
+}
+
+
+### 3. Create Ticket (Client only)
+POST {{baseUrl}}/api/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTMwNDksImV4cCI6MTc0NjY5NjY0OX0.HwaAuinhEIjK1hhpP3AHcdaZ6v5kIRpSegR-xghry-E
+
+{
+  "title": "Broken AC Unit 2",
+  "description": "The air conditioning in Room 203 is not cooling properly.",
+  "priority": "High"
+}
+
+### 4. View My Tickets (Any authenticated user)
+GET {{baseUrl}}/api/tickets/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTMwNDksImV4cCI6MTc0NjY5NjY0OX0.HwaAuinhEIjK1hhpP3AHcdaZ6v5kIRpSegR-xghry-E
+
+### 5. View All Tickets (Admin/Engineer only)
+GET {{baseUrl}}/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NjcyMzA5NywiZXhwIjoxNzQ2NzI2Njk3fQ.JORL1X4jIOo3yXho8AaTOZ47cZt9RQB_1smVOUL9IHU
+
+# Maintenance Ticket API Tests
+
+### 1. Login as Admin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "admin"
+}
+
+### 2. Store admin token from response
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NjY0Nzg3NCwiZXhwIjoxNzQ2NjUxNDc0fQ.nc4hR52n5zdaC3E9XVchAoo31U6NzjXLyjA5ZbOsQAQ
+
+### 3. Create a technician user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NjY0Nzg3NCwiZXhwIjoxNzQ2NjUxNDc0fQ.nc4hR52n5zdaC3E9XVchAoo31U6NzjXLyjA5ZbOsQAQ
+
+{
+  "name": "Test Technician",
+  "email": "technician@example.com",
+  "password": "password123",
+  "role": "Technician"
+}
+
+### 4. Create an engineer user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NjY0Nzg3NCwiZXhwIjoxNzQ2NjUxNDc0fQ.nc4hR52n5zdaC3E9XVchAoo31U6NzjXLyjA5ZbOsQAQ
+
+{
+  "name": "Test Engineer",
+  "email": "engineer@example.com",
+  "password": "password123",
+  "role": "Engineer"
+}
+
+### 5. Create a client user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NjY0Nzg3NCwiZXhwIjoxNzQ2NjUxNDc0fQ.nc4hR52n5zdaC3E9XVchAoo31U6NzjXLyjA5ZbOsQAQ
+
+{
+  "name": "Test Client",
+  "email": "client@example.com",
+  "password": "password123",
+  "role": "Client"
+}
+
+### 6. Login as technician
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "technician@example.com",
+  "password": "password123"
+}
+
+### 7. Store technician token
+@technicianToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2NjQ3OTE4LCJleHAiOjE3NDY2NTE1MTh9.1iOdYGxnhTbBNzRwNhXaj8vUF5QLWOXhl-Mo5dHKgeY
+
+### 8. Login as engineer
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "engineer@example.com",
+  "password": "password123"
+}
+
+### 9. Store engineer token
+@engineerToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NjY0Nzk5NywiZXhwIjoxNzQ2NjUxNTk3fQ.lwt6Pi7PNPPrHI3kQPBLACnXgh16p7DAtlXnI-uDSg8
+
+### 10. Login as client
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "client@example.com",
+  "password": "password123"
+}
+
+### 11. Store client token
+@clientToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjY5NDc1YzcwNjA4ZmYyYjQyMSIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2NDc5NDcsImV4cCI6MTc0NjY1MTU0N30.fHtimAVQgdWZ2jzx-Hbvsj4mLRYB6bFOh-HViH4eEOw
+
+### 12. Create a ticket as client
+POST {{baseUrl}}/api/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTMwNDksImV4cCI6MTc0NjY5NjY0OX0.HwaAuinhEIjK1hhpP3AHcdaZ6v5kIRpSegR-xghry-E
+
+{
+  "title": "Test Maintenance Issue 2",
+  "description": "This is a test ticket for assignment"
+}
+
+### 13. Store the ticket ID from response
+@ticketId = 123456789...
+
+### 14. Assign ticket to technician (as engineer)
+PATCH {{baseUrl}}/api/tickets/681c6c2056e8d8af1c447db9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NjczMTQyOSwiZXhwIjoxNzQ2NzM1MDI5fQ.0-851mAdN22KJ9VbFiPHQSYB1hJs6Jg36Gmiq15ipkI
+
+{
+  "assignedTo": "681bbb58475c70608ff2b41d"
+}
+
+### 15. Create another ticket as client
+POST {{baseUrl}}/api/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTc5MDEsImV4cCI6MTc0NjcwMTUwMX0.jA3gBdcUKRS1ENORpvDN7DSQGTcsuA8scHAhU7HQ9SY
+
+{
+  "title": "Another Test Issue with comments",
+  "description": "This is another test ticket for assignment"
+}
+
+### 16. Store the second ticket ID
+@ticketId2 = 681bbc8c475c70608ff2b42d
+
+
+
+### 18. Get tickets assigned to technician
+GET {{baseUrl}}/api/tickets/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2OTEyMTI4LCJleHAiOjE3NDY5MTU3Mjh9.4WNqbX1mudZOVtpgsQPFzi8KNaV7v79kZ6K9CGlwLpA
+
+
+### 20. Try to access assigned tickets as client (should be forbidden)
+GET {{baseUrl}}/api/tickets/assigned
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2OTEyMTI4LCJleHAiOjE3NDY5MTU3Mjh9.4WNqbX1mudZOVtpgsQPFzi8KNaV7v79kZ6K9CGlwLpA
+
+### 21. Try to access assigned tickets as admin (should be forbidden)
+GET {{baseUrl}}/api/tickets/assigned
+Authorization: Bearer {{adminToken}}
+
+### 22. Try to access without token (should be unauthorized)
+GET {{baseUrl}}/api/tickets/assigned
+
+
+### Comment API Tests
+
+
+### Add a comment as client (to their own ticket)
+POST {{baseUrl}}/api/tickets/681c7f68a0fa14c3122aaa6c/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTc5MDEsImV4cCI6MTc0NjcwMTUwMX0.jA3gBdcUKRS1ENORpvDN7DSQGTcsuA8scHAhU7HQ9SY
+
+{
+  "content": "This repair is taking too long.",
+  "isInternal": false
+}
+
+### Try to add an internal comment as client (should fail)
+POST {{baseUrl}}/api/tickets/681bbc8c475c70608ff2b42d/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTc5MDEsImV4cCI6MTc0NjcwMTUwMX0.jA3gBdcUKRS1ENORpvDN7DSQGTcsuA8scHAhU7HQ9SY
+
+{
+  "content": "This should fail",
+  "isInternal": true
+}
+
+### Add a comment as technician
+POST {{baseUrl}}/api/tickets/681bbc8c475c70608ff2b42d/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2NjQ3OTE4LCJleHAiOjE3NDY2NTE1MTh9.1iOdYGxnhTbBNzRwNhXaj8vUF5QLWOXhl-Mo5dHKgeY
+
+{
+  "content": "Working on this issue now test 1 2.",
+  "isInternal": false
+}
+
+### Add an internal comment as technician
+POST {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2NjQ3OTE4LCJleHAiOjE3NDY2NTE1MTh9.1iOdYGxnhTbBNzRwNhXaj8vUF5QLWOXhl-Mo5dHKgeY
+
+{
+  "content": "Need additional parts for this repair.",
+  "isInternal": true
+}
+
+### Get ticket comments as client (should only see non-internal)
+GET {{baseUrl}}/api/tickets/681c7f68a0fa14c3122aaa6c/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWM2YmE5NTZlOGQ4YWYxYzQ0N2RiMiIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2OTc5MDEsImV4cCI6MTc0NjcwMTUwMX0.jA3gBdcUKRS1ENORpvDN7DSQGTcsuA8scHAhU7HQ9SY
+
+### Get ticket comments as technician (should see internal comments)
+GET {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2NjQ3OTE4LCJleHAiOjE3NDY2NTE1MTh9.1iOdYGxnhTbBNzRwNhXaj8vUF5QLWOXhl-Mo5dHKgeY
+
+### Procurement API Tests
+
+### Create procurement item as technician
+POST {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/procurements
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ3MTYyNjg5LCJleHAiOjE3NDcxNjYyODl9.dqaRg2p3ASOOzmPugKheza_SwF7Nq_SDgzezEnCTTTc
+
+{
+  "itemName": "HVAC Filter",
+  "quantity": 2,
+  "estimatedCost": 45.99
+}
+
+### Create procurement item as engineer
+POST {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/procurements
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NjY0Nzk5NywiZXhwIjoxNzQ2NjUxNTk3fQ.lwt6Pi7PNPPrHI3kQPBLACnXgh16p7DAtlXnI-uDSg8
+
+{
+  "itemName": "Fan Motor",
+  "quantity": 1,
+  "estimatedCost": 129.99
+}
+
+### Get procurement items for a ticket as technician
+GET {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/procurements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ3MTY2OTcyLCJleHAiOjE3NDcxNzA1NzJ9.CqERUvlUyw_i2l5BMeGN8ymOWh8M76h8Tr3goGSNcis
+
+### Get procurement items for a ticket as client
+GET {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1/procurements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjY5NDc1YzcwNjA4ZmYyYjQyMSIsInJvbGUiOiJDbGllbnQiLCJpYXQiOjE3NDY2NDc5NDcsImV4cCI6MTc0NjY1MTU0N30.fHtimAVQgdWZ2jzx-Hbvsj4mLRYB6bFOh-HViH4eEOw
+
+### Get all procurements as engineer
+GET {{baseUrl}}/api/procurements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NzE2ODk1OSwiZXhwIjoxNzQ3MTcyNTU5fQ.U_QiP6cI3ap07716eiu_xFOGW4DXzKvlcpY3NG0BTVc
+
+### Get all procurements filtered by status
+GET {{baseUrl}}/api/procurements?status=Requested
+Authorization: Bearer {{engineerToken}}
+
+### Update procurement status - after creating an item, copy its ID here
+PATCH {{baseUrl}}/api/procurements/681bc78f7808e974dbbe9fc7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NzE2ODk1OSwiZXhwIjoxNzQ3MTcyNTU5fQ.U_QiP6cI3ap07716eiu_xFOGW4DXzKvlcpY3NG0BTVc
+
+{
+  "status": "Approved"
+}
+
+### Mark procurement as received (technician only)
+PATCH {{baseUrl}}/api/procurements/ITEM_ID_HERE
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ2NjQ3OTE4LCJleHAiOjE3NDY2NTE1MTh9.1iOdYGxnhTbBNzRwNhXaj8vUF5QLWOXhl-Mo5dHKgeY
+
+{
+  "status": "Received"
+}
+
+### Set ticket deadline as engineer
+PATCH {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1
+Content-Type: application/json
+Authorization: Bearer {{engineerToken}}
+
+{
+  "deadline": "2024-08-01T00:00:00.000Z"
+}
+
+### Update ticket status as technician
+PATCH {{baseUrl}}/api/tickets/681bbfb7f156d9902dd3f1e1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjU4NDc1YzcwNjA4ZmYyYjQxZCIsInJvbGUiOiJUZWNobmljaWFuIiwiaWF0IjoxNzQ3MTYyNjg5LCJleHAiOjE3NDcxNjYyODl9.dqaRg2p3ASOOzmPugKheza_SwF7Nq_SDgzezEnCTTTc
+
+{
+  "status": "In Progress"
+}
+### Get all technicians (as engineer)
+GET {{baseUrl}}/api/users/technicians
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjYxNDc1YzcwNjA4ZmYyYjQxZiIsInJvbGUiOiJFbmdpbmVlciIsImlhdCI6MTc0NjczMjM4NiwiZXhwIjoxNzQ2NzM1OTg2fQ._pBp71o77835-FV2N7EpM-50xZkgbcXfFR7SjTs5JQs
+
+### Get all tickets (admin only)
+GET {{baseUrl}}/api/admin/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NzI0OTQyMywiZXhwIjoxNzQ3MjUzMDIzfQ.ZrmvQmr4G5Eb2pPYrn2dA_ZQnR3VO6fFDxyNVlWkGcs
+
+### Get all procurements (admin only)
+GET {{baseUrl}}/api/admin/procurements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWJiYjJmMTllNjM2NDY5MWI2NGI5NSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NzI0OTQyMywiZXhwIjoxNzQ3MjUzMDIzfQ.ZrmvQmr4G5Eb2pPYrn2dA_ZQnR3VO6fFDxyNVlWkGcs

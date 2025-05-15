@@ -1,0 +1,32 @@
+:root {
+    /* Background & Text */
+    --color-bg: #f4f6f8;
+    --color-text: #1f2937;
+    --pink-light:#d6336c;
+    --pink-medium: #ff6f91;
+    --pink-dark: #ffb6c1;
+
+    --green-light: #155724;
+    --green-medium: #28a745;
+    --green-dark: #d4edda;
+
+    /* Primary Accent */
+    --color-primary: #3b82f6;
+    --color-primary-hover: #2563eb;
+    --color-primary-text: #ffffff;
+
+    /* Navigation */
+    --color-nav-bg: #ffffff;
+    --color-nav-text: var(--color-text);
+    --color-nav-border: #e5e7eb;
+
+    /* Card */
+    --color-card-bg: #ffffff;
+    --color-card-border: #e5e7eb;
+    --color-card-shadow: rgba(0, 0, 0, 0.03);
+
+    /* Button */
+    --color-btn-bg: var(--color-primary);
+    --color-btn-text: var(--color-primary-text);
+    --color-btn-hover: var(--color-primary-hover);
+}

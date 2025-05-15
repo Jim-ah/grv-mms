@@ -1,0 +1,328 @@
+/* Home Page Hero */
+.hero {
+    text-align: center;
+    margin: 3rem 0;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.hero p {
+    font-size: 1.2rem;
+    color: #4b5563;
+}
+
+/* Login Page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    padding: 1rem;
+}
+.login-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px var(--color-card-shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+.login-card h2 {
+    margin: 0 0 1.5rem;
+    color: var(--color-text);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.login-field {
+    margin-bottom: 1rem;
+}
+.login-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.login-field input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-nav-border);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+.login-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+/* Ticket form container: center on the page */
+.ticket-form-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Constrain the width of the card */
+.ticket-form-card {
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Form‐field spacing */
+.form-field {
+    margin-bottom: 1rem;
+}
+.form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-nav-border);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+/* Clamp description to 3 lines with ellipsis */
+.ticket-card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.5rem;
+}
+
+/* When expanded, show full text */
+.ticket-card-desc.expanded {
+    -webkit-line-clamp: unset;
+    display: block;
+}
+/* Only inside the EngineerTickets page */
+.engineer-tickets-page .ticket-card {
+    border-color: var(--pink-light);
+}
+
+.engineer-tickets-page .btn {
+    background-color: var(--pink-light);
+    border: 1px solid var(--pink-medium);
+    color: #fff;
+}
+
+.engineer-tickets-page .btn:hover {
+    background-color: var(--pink-medium);
+    border-color: var(--pink-dark);
+}
+
+.engineer-tickets-page input[placeholder*="Filter"] {
+    border-color: var(--pink-light);
+}
+
+.engineer-tickets-page input[placeholder*="Filter"]:focus {
+    outline-color: var(--pink-medium);
+    box-shadow: 0 0 0 2px rgba(255,111,145,0.3);
+}
+/* src/styles/pages.css */
+/* Only affects TicketDetail when wrapped in .engineer-ticket-detail-page */
+.engineer-ticket-detail-page .btn {
+    background-color: var(--pink-light);
+    border: 1px solid var(--pink-medium);
+    color: #fff;
+}
+.engineer-ticket-detail-page .btn:hover {
+    background-color: var(--pink-medium);
+    border-color: var(--pink-dark);
+}
+
+/* Card border */
+.engineer-ticket-detail-page .ticket-detail-card {
+    border: 1px solid var(--pink-light);
+}
+
+/* Comment cards */
+.engineer-ticket-detail-page .comment-card {
+    border: 1px solid var(--pink-light);
+}
+
+/* Section headings and error text */
+.engineer-ticket-detail-page h2,
+.engineer-ticket-detail-page h3 {
+    color: var(--pink-dark);
+}
+.engineer-ticket-detail-page p[style*="color: red"] {
+    /* error paragraphs */
+    color: var(--pink-dark) !important;
+}
+
+/* Textarea border */
+.engineer-ticket-detail-page textarea {
+    border: 1px solid var(--pink-light);
+}
+.engineer-ticket-detail-page textarea:focus {
+    outline-color: var(--pink-medium);
+    box-shadow: 0 0 0 2px rgba(255,111,145,0.3);
+}
+/* src/styles/pages.css */
+
+.engineer-ticket-detail-page .assign-section {
+    background-color: #fff5f7;           /* very light pink background */
+    border: 1px solid var(--pink-light);
+}
+
+.engineer-ticket-detail-page .assign-label {
+    color: var(--pink-dark);
+}
+
+.engineer-ticket-detail-page .assign-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--pink-light);
+    border-radius: 0.375rem;
+    background: #fff;
+    font-size: 1rem;
+    flex: 1; /* take up remaining space */
+}
+
+.engineer-ticket-detail-page .assign-button {
+    background-color: var(--pink-medium);
+    border: 1px solid var(--pink-dark);
+    color: #fff;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.engineer-ticket-detail-page .assign-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.engineer-ticket-detail-page .assign-button:not(:disabled):hover {
+    background-color: var(--pink-dark);
+    border-color: var(--pink-dark);
+}
+
+.engineer-ticket-detail-page .assign-error {
+    color: var(--pink-dark);
+    font-size: 0.875rem;
+}
+
+.users-page .page-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--pink-dark);
+}
+
+.users-page .user-form .form-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--pink-dark);
+}
+
+.users-page .input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--pink-light);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+.users-page .btn {
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.users-page .btn.primary {
+    background-color: var(--pink-light);
+    border: 1px solid var(--pink-medium);
+    color: #fff;
+}
+
+.users-page .btn.secondary {
+    background-color: #fff;
+    border: 1px solid var(--pink-medium);
+    color: var(--pink-medium);
+}
+
+.users-page .btn.danger {
+    background-color: #fed7d7;
+    border: 1px solid #f56565;
+    color: #c53030;
+}
+
+.users-page .btn:not(.danger):hover {
+    opacity: 0.9;
+}
+
+.users-page .user-table .th,
+.users-page .user-table .td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.users-page .user-table .th {
+    text-align: left;
+    background-color: #fff5f7;
+    color: var(--pink-dark);
+}
+
+.users-page .user-table .tr:hover {
+    background-color: #fff5f7;
+}
+
+/* ---------------------------
+   Technician “List” cards
+   --------------------------- */
+.technician-tickets-page .ticket-card {
+    /* full light‐green border */
+    border: 1px solid var(--green-light);
+    /* thick medium‐green accent on the left */
+    border-left: 4px solid var(--green-medium);
+}
+
+/* you can keep the subtle box‐shadow from your base card if you had one */
+.technician-tickets-page .ticket-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* -------------------------------
+   Technician “Detail” card & comments
+   ------------------------------- */
+.technician-ticket-detail-page .ticket-detail-card,
+.technician-ticket-detail-page .comment-card {
+    border: 1px solid var(--green-light);
+    border-left: 4px solid var(--green-medium);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+/* ---------------------------
+   Technician “List” buttons
+   --------------------------- */
+.technician-tickets-page .btn {
+    background-color: var(--green-light) !important;
+    border: 1px solid var(--green-medium) !important;
+    color: #fff !important;
+}
+.technician-tickets-page .btn:hover {
+    background-color: var(--green-medium) !important;
+    border-color: var(--green-dark) !important;
+}
+
+/* -------------------------------
+   Technician “Detail” buttons
+   ------------------------------- */
+.technician-ticket-detail-page .btn {
+    background-color: var(--green-light) !important;
+    border: 1px solid var(--green-medium) !important;
+    color: #fff !important;
+}
+.technician-ticket-detail-page .btn:hover {
+    background-color: var(--green-medium) !important;
+    border-color: var(--green-dark) !important;
+}
